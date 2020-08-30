@@ -1,0 +1,598 @@
+
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>Camaloon Print on Demand API (v1)</title>
+
+    <style media="screen">
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight .gh {
+  color: #999999;
+}
+.highlight .sr {
+  color: #f6aa11;
+}
+.highlight .go {
+  color: #888888;
+}
+.highlight .gp {
+  color: #555555;
+}
+.highlight .gs {
+}
+.highlight .gu {
+  color: #aaaaaa;
+}
+.highlight .nb {
+  color: #f6aa11;
+}
+.highlight .cm {
+  color: #75715e;
+}
+.highlight .cp {
+  color: #75715e;
+}
+.highlight .c1 {
+  color: #75715e;
+}
+.highlight .cs {
+  color: #75715e;
+}
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cpf {
+  color: #75715e;
+}
+.highlight .err {
+  color: #960050;
+}
+.highlight .gr {
+  color: #960050;
+}
+.highlight .gt {
+  color: #960050;
+}
+.highlight .gd {
+  color: #49483e;
+}
+.highlight .gi {
+  color: #49483e;
+}
+.highlight .ge {
+  color: #49483e;
+}
+.highlight .kc {
+  color: #66d9ef;
+}
+.highlight .kd {
+  color: #66d9ef;
+}
+.highlight .kr {
+  color: #66d9ef;
+}
+.highlight .no {
+  color: #66d9ef;
+}
+.highlight .kt {
+  color: #66d9ef;
+}
+.highlight .mf {
+  color: #ae81ff;
+}
+.highlight .mh {
+  color: #ae81ff;
+}
+.highlight .il {
+  color: #ae81ff;
+}
+.highlight .mi {
+  color: #ae81ff;
+}
+.highlight .mo {
+  color: #ae81ff;
+}
+.highlight .m, .highlight .mb, .highlight .mx {
+  color: #ae81ff;
+}
+.highlight .sc {
+  color: #ae81ff;
+}
+.highlight .se {
+  color: #ae81ff;
+}
+.highlight .ss {
+  color: #ae81ff;
+}
+.highlight .sd {
+  color: #e6db74;
+}
+.highlight .s2 {
+  color: #e6db74;
+}
+.highlight .sb {
+  color: #e6db74;
+}
+.highlight .sh {
+  color: #e6db74;
+}
+.highlight .si {
+  color: #e6db74;
+}
+.highlight .sx {
+  color: #e6db74;
+}
+.highlight .s1 {
+  color: #e6db74;
+}
+.highlight .s, .highlight .sa, .highlight .dl {
+  color: #e6db74;
+}
+.highlight .na {
+  color: #a6e22e;
+}
+.highlight .nc {
+  color: #a6e22e;
+}
+.highlight .nd {
+  color: #a6e22e;
+}
+.highlight .ne {
+  color: #a6e22e;
+}
+.highlight .nf, .highlight .fm {
+  color: #a6e22e;
+}
+.highlight .vc {
+  color: #ffffff;
+}
+.highlight .nn {
+  color: #ffffff;
+}
+.highlight .ni {
+  color: #ffffff;
+}
+.highlight .bp {
+  color: #ffffff;
+}
+.highlight .vg {
+  color: #ffffff;
+}
+.highlight .vi {
+  color: #ffffff;
+}
+.highlight .nv, .highlight .vm {
+  color: #ffffff;
+}
+.highlight .w {
+  color: #ffffff;
+}
+.highlight {
+  color: #ffffff;
+}
+.highlight .n, .highlight .py, .highlight .nx {
+  color: #ffffff;
+}
+.highlight .nl {
+  color: #f92672;
+}
+.highlight .ow {
+  color: #f92672;
+}
+.highlight .nt {
+  color: #f92672;
+}
+.highlight .k, .highlight .kv {
+  color: #f92672;
+}
+.highlight .kn {
+  color: #f92672;
+}
+.highlight .kp {
+  color: #f92672;
+}
+.highlight .o {
+  color: #f92672;
+}
+    </style>
+    <style media="print">
+      * {
+        -webkit-transition:none!important;
+        transition:none!important;
+      }
+      .highlight table td { padding: 5px; }
+.highlight table pre { margin: 0; }
+.highlight, .highlight .w {
+  color: #586e75;
+}
+.highlight .err {
+  color: #002b36;
+  background-color: #dc322f;
+}
+.highlight .c, .highlight .ch, .highlight .cd, .highlight .cm, .highlight .cpf, .highlight .c1, .highlight .cs {
+  color: #657b83;
+}
+.highlight .cp {
+  color: #b58900;
+}
+.highlight .nt {
+  color: #b58900;
+}
+.highlight .o, .highlight .ow {
+  color: #93a1a1;
+}
+.highlight .p, .highlight .pi {
+  color: #93a1a1;
+}
+.highlight .gi {
+  color: #859900;
+}
+.highlight .gd {
+  color: #dc322f;
+}
+.highlight .gh {
+  color: #268bd2;
+  background-color: #002b36;
+  font-weight: bold;
+}
+.highlight .k, .highlight .kn, .highlight .kp, .highlight .kr, .highlight .kv {
+  color: #6c71c4;
+}
+.highlight .kc {
+  color: #cb4b16;
+}
+.highlight .kt {
+  color: #cb4b16;
+}
+.highlight .kd {
+  color: #cb4b16;
+}
+.highlight .s, .highlight .sa, .highlight .sb, .highlight .sc, .highlight .dl, .highlight .sd, .highlight .s2, .highlight .sh, .highlight .sx, .highlight .s1 {
+  color: #859900;
+}
+.highlight .sr {
+  color: #2aa198;
+}
+.highlight .si {
+  color: #d33682;
+}
+.highlight .se {
+  color: #d33682;
+}
+.highlight .nn {
+  color: #b58900;
+}
+.highlight .nc {
+  color: #b58900;
+}
+.highlight .no {
+  color: #b58900;
+}
+.highlight .na {
+  color: #268bd2;
+}
+.highlight .m, .highlight .mb, .highlight .mf, .highlight .mh, .highlight .mi, .highlight .il, .highlight .mo, .highlight .mx {
+  color: #859900;
+}
+.highlight .ss {
+  color: #859900;
+}
+    </style>
+    <link href="stylesheets/screen-55822d3f.css" rel="stylesheet" media="screen" />
+    <link href="stylesheets/print-c778e836.css" rel="stylesheet" media="print" />
+      <script src="javascripts/all_nosearch-ea811c3e.js"></script>
+
+    <script>
+      $(function() { setupCodeCopy(); });
+    </script>
+  </head>
+
+  <body class="index" data-languages="[&quot;shell&quot;]">
+    <a href="#" id="nav-button">
+      <span>
+        <img src="images/navbar-6ad8e2f4.svg" alt="" />
+      </span>
+    </a>
+    <div class="toc-wrapper">
+      <div class="image-logo">
+        <img src="images/camaloon_logo-6dd4773a.svg" class="logo" alt="" />
+      </div>
+        <div class="lang-selector">
+              <a href="#" data-language-name="shell">code</a>
+        </div>
+      <ul id="toc" class="toc-list-h1">
+          <li>
+            <a href="#introduction" class="toc-h1 toc-link" data-title="Introduction">Introduction</a>
+          </li>
+          <li>
+            <a href="#webhooks-to-camaloon" class="toc-h1 toc-link" data-title="Webhooks to Camaloon">Webhooks to Camaloon</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#configuration" class="toc-h2 toc-link" data-title="Configuration">Configuration</a>
+                  </li>
+                  <li>
+                    <a href="#order-paid-event" class="toc-h2 toc-link" data-title="Order paid event">Order paid event</a>
+                  </li>
+              </ul>
+          </li>
+          <li>
+            <a href="#webhooks-from-camaloon" class="toc-h1 toc-link" data-title="Webhooks from Camaloon">Webhooks from Camaloon</a>
+              <ul class="toc-list-h2">
+                  <li>
+                    <a href="#configuration-2" class="toc-h2 toc-link" data-title="Configuration">Configuration</a>
+                  </li>
+                  <li>
+                    <a href="#shipment-sent-event" class="toc-h2 toc-link" data-title="Shipment sent event">Shipment sent event</a>
+                  </li>
+              </ul>
+          </li>
+      </ul>
+        <ul class="toc-footer">
+            <li><a href='https://camaloon.com/print_on_demand'>Camaloon Print on Demand</a></li>
+        </ul>
+    </div>
+    <div class="page-wrapper">
+      <div class="dark-box"></div>
+      <div class="content">
+        <h1 id='introduction'>Introduction</h1>
+<p>Welcome to Camaloon Print On Demand API (version 1.0)!</p>
+<h1 id='webhooks-to-camaloon'>Webhooks to Camaloon</h1>
+<p>In this section we are going to describe webhooks originated by events on the origin ecommerce platform.</p>
+<h2 id='configuration'>Configuration</h2><h3 id='webhook-endpoint'>Webhook endpoint</h3>
+<p>Webhooks to Camaloon must be sent as a <strong>POST</strong> request to the following endpoint:  </p>
+
+<aside class="success">
+<span style="font-weight: bold; font-size: 1.2em; font-family: monospace">https://camaloon.com/print_on_demand/generic/webhooks/receive</span>
+</aside>
+<h3 id='webhook-headers'>Webhook headers</h3>
+<p>Webhooks sent to Camaloon must contain the following headers:</p>
+
+<p><strong><code>X-CAMALOON-SOURCE-DOMAIN</code></strong>: Your store domain, the same used when creating the store in Camaloon.<br>
+<strong><code>X-CAMALOON-TOPIC</code></strong>: Event name (ex: <code>order_paid</code>).<br>
+<strong><code>X-CAMALOON-HMAC-SHA256</code></strong>: Base64 digest of the request body payload using the API secret key provided by Camaloon.  </p>
+<h2 id='order-paid-event'>Order paid event</h2>
+<p>When an order is <strong>paid</strong> in your ecommerce platform, a POST request should be sent to the <a href="#endpoint">Camaloon webhook endpoint</a> with the <code>X-CAMALOON-TOPIC=order_paid</code> header.</p>
+
+<blockquote>
+<p>Request payload example</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20200901003"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"tax_rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.21</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-09-01T16:09:54-04:00"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"processed_at"</span><span class="p">:</span><span class="s2">"2020-09-01T16:09:55-04:00"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"shipping_price"</span><span class="p">:</span><span class="w"> </span><span class="mf">3.2</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"shipping_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"telephone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"address2"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"billing_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
+    </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"telephone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"address2"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"province"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+  </span><span class="p">},</span><span class="w">
+  </span><span class="nl">"line_items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">12.5</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>See on the right an example of request payload of a paid order.</p>
+<h3 id='order-properties'>Order properties</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>id</code></td>
+<td>no</td>
+<td>Order id in your system.</td>
+</tr>
+<tr>
+<td><code>ref</code></td>
+<td>yes</td>
+<td>Human name of the order.</td>
+</tr>
+<tr>
+<td><code>currency</code></td>
+<td>no</td>
+<td>Currency <a href="https://en.wikipedia.org/wiki/ISO_4217">ISO 4217 code</a> of the order.</td>
+</tr>
+<tr>
+<td><code>tax_rate</code></td>
+<td>no</td>
+<td>The tax rate applied to the order to calculate the tax price.</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td>no</td>
+<td>The <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> date and time when an order has been created.</td>
+</tr>
+<tr>
+<td><code>processed_at</code></td>
+<td>no</td>
+<td>The <a href="https://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a> date and time when an order has been processed (paid).</td>
+</tr>
+<tr>
+<td><code>shipping_price</code></td>
+<td>no</td>
+<td>Total shipping price, without tax, in the order&#39;s currency.</td>
+</tr>
+<tr>
+<td><code>shipping_info</code></td>
+<td>no</td>
+<td>The mailing address to where the order will be shipped. See <a href="#address-properties">address properties</a>.</td>
+</tr>
+<tr>
+<td><code>billing_info</code></td>
+<td>yes</td>
+<td>The billing address of the customer. If not provided, shipping info will be used. See <a href="#address-properties">address properties</a>.</td>
+</tr>
+<tr>
+<td><code>line_items</code></td>
+<td>no</td>
+<td>Items purchased in the order. See <a href="#line-item-properties">line item properties</a>.</td>
+</tr>
+</tbody></table>
+<h3 id='address-properties'>Address properties</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>first_name</code></td>
+<td>no</td>
+<td>The first name of the person associated with the address.</td>
+</tr>
+<tr>
+<td><code>last_name</code></td>
+<td>no</td>
+<td>The last name of the person associated with the address.</td>
+</tr>
+<tr>
+<td><code>company_name</code></td>
+<td>yes</td>
+<td>The company of the person associated with the address.</td>
+</tr>
+<tr>
+<td><code>telephone</code></td>
+<td>yes</td>
+<td>The phone number at the address or client&#39;s phone. Max length: 15</td>
+</tr>
+<tr>
+<td><code>address</code></td>
+<td>no</td>
+<td>The street address.</td>
+</tr>
+<tr>
+<td><code>address2</code></td>
+<td>yes</td>
+<td>An optional additional field for the street address.</td>
+</tr>
+<tr>
+<td><code>zip</code></td>
+<td>no</td>
+<td>Valid postal code of the address.</td>
+</tr>
+<tr>
+<td><code>city</code></td>
+<td>no</td>
+<td>The city, town, or village of the address.</td>
+</tr>
+<tr>
+<td><code>province</code></td>
+<td>no</td>
+<td>The name of the region (province, state, prefecture, …) of the address.</td>
+</tr>
+<tr>
+<td><code>country_code</code></td>
+<td>no</td>
+<td>The two-letter <a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a> code for the country of the address.</td>
+</tr>
+</tbody></table>
+<h3 id='line-item-properties'>Line item properties</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>sku</code></td>
+<td>no</td>
+<td>Stock Keeping Unit. If matches one of the sku&#39;s on your Camaloon store, the item will be processed by Camaloon.</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>yes</td>
+<td>Name of the product or description of the line item.</td>
+</tr>
+<tr>
+<td><code>quantity</code></td>
+<td>no</td>
+<td>The number of items that were purchased.</td>
+</tr>
+<tr>
+<td><code>price</code></td>
+<td>no</td>
+<td>The total final price of the line item, without taxes.</td>
+</tr>
+</tbody></table>
+<h1 id='webhooks-from-camaloon'>Webhooks from Camaloon</h1>
+<p>In this section we are going to describe webhooks originated by events on the Camaloon&#39;s side.</p>
+<h2 id='configuration-2'>Configuration</h2><h3 id='webhook-endpoint-2'>Webhook endpoint</h3>
+<p>Endpoints for the different events originated in Camaloon can be configured in the store backoffice.</p>
+
+<p>You will create a webhook, selecting the event name and define the endpoint that will process the webhook on your side.</p>
+<h3 id='webhook-headers-2'>Webhook headers</h3>
+<p>Webhooks originated in Camaloon include the following headers.</p>
+
+<p><strong><code>X-CAMALOON-TOPIC</code></strong>: Event name (ex: <code>shipment_sent</code>).<br>
+<strong><code>X-CAMALOON-HMAC-SHA256</code></strong>: Base64 digest of the request body payload using the API secret key provided by Camaloon.  </p>
+<h2 id='shipment-sent-event'>Shipment sent event</h2>
+<p>When an order has been fulfilled by Camaloon and a shipment has been collected by the carrier service, a webhook will be sent with the tracking shipment info.  </p>
+
+<aside class="notice">
+NOTE: one or multiple shipments can be sent from Camaloon for the same order. This means that a shipment can contain all or part of the line items produced by Camaloon.
+</aside>
+
+<blockquote>
+<p>Request payload example</p>
+</blockquote>
+<div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"order_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"tracking_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"tracking_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"notify_customer"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"line_items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="p">{</span><span class="w">
+      </span><span class="nl">"sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
+    </span><span class="p">}</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div>
+<p>See on the right an example of request payload of a shipment sent.</p>
+<h3 id='webhook-errors'>Webhook errors</h3>
+<p>Camaloon will listen to the HTTP response code of the webhook request, expecting a <code>200</code> or <code>204</code> code.</p>
+
+<p>If the code returned is <code>410</code>, the webhook will be removed permanently.</p>
+
+<p>Any other response code will make the webhook retry 3 times at most. If a webhook fails 20 times consecutively, it will be temporarily disabled.</p>
+
+      </div>
+      <div class="dark-box">
+          <div class="lang-selector">
+                <a href="#" data-language-name="shell">code</a>
+          </div>
+      </div>
+    </div>
+  </body>
+</html>
