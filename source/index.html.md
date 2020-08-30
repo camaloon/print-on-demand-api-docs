@@ -16,6 +16,10 @@ code_clipboard: true
 
 Welcome to Camaloon Print On Demand API (version 1.0)!
 
+This API allows Print On Demand clients with ad hoc ecommerce platforms to connect to Camaloon Print On Demand platform.
+
+The API is asynchronous and event based (via webhooks).
+
 # Webhooks to Camaloon
 
 In this section we are going to describe webhooks originated by events on the origin ecommerce platform.
@@ -48,39 +52,41 @@ When an order is **paid** in your ecommerce platform, a POST request should be s
 {
   "id": 1,
   "ref": "20200901003",
-  "currency": "EUR",
-  "tax_rate": 0.21,
+  "currency": "USD",
+  "tax_rate": 0.12,
   "created_at": "2020-09-01T16:09:54-04:00",
   "processed_at":"2020-09-01T16:09:55-04:00",
   "shipping_price": 3.2,
   "shipping_info": {
-    "first_name": "",
-    "last_name": "",
-    "company_name": "",
-    "telephone": "",
-    "address": "",
+    "first_name": "Raymond B",
+    "last_name": "Gordon",
+    "company_name": "Gordon & Sons",
+    "telephone": "509-259-7576",
+    "address": "1317 Dane Street",
     "address2": "",
-    "zip": "",
-    "city": "",
+    "zip": "99032",
+    "city": "Sprague",
+    "province": "Washington",
+    "country_code": "US"
   },
   "billing_info": {
-    "first_name": "",
-    "last_name": "",
-    "company_name": "",
-    "telephone": "",
-    "address": "",
+    "first_name": "Raymond B",
+    "last_name": "Gordon",
+    "company_name": "Gordon & Sons",
+    "telephone": "509-259-7576",
+    "address": "1317 Dane Street",
     "address2": "",
-    "zip": "",
-    "city": "",
-    "province": "",
-    "country_code": ""
+    "zip": "99032",
+    "city": "Sprague",
+    "province": "Washington",
+    "country_code": "US"
   },
   "line_items": [
     {
-      "sku": "",
-      "description": "",
+      "sku": "063e8da93379f8c1aee0",
+      "description": "Magic mug",
       "quantity": 10,
-      "price": 12.5
+      "price": 82.84
     }
   ]
 }
@@ -128,6 +134,10 @@ Parameter | Optional | Description
 `quantity` | no | The number of items that were purchased.
 `price` | no | The total final price of the line item, without taxes.
 
+### Error handling
+
+Webhooks are processed asynchronously, but the data received is validated according to the previous described schema.
+If the data does not follow the schema, a HTTP status code `400` is returned and along a `JSON` with a list of errors.
 
 # Webhooks from Camaloon
 
@@ -162,12 +172,12 @@ NOTE: one or multiple shipments can be sent from Camaloon for the same order. Th
 ```json
 {
   "order_id": 1,
-  "tracking_number": "",
-  "tracking_url": "",
+  "tracking_number": "9414 1058 1746 0398 1325 11",
+  "tracking_url": "https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=9414105817460398132511",
   "notify_customer": true,
   "line_items": [
     {
-      "sku": "",
+      "sku": "063e8da93379f8c1aee0",
       "quantity": 10
     }
   ]
@@ -176,7 +186,7 @@ NOTE: one or multiple shipments can be sent from Camaloon for the same order. Th
 
 See on the right an example of request payload of a shipment sent.
 
-### Webhook errors
+### Error handling
 
 Camaloon will listen to the HTTP response code of the webhook request, expecting a `200` or `204` code.
 
