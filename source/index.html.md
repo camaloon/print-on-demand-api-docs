@@ -1,241 +1,185 @@
 ---
-title: API Reference
+title: Camaloon Print on Demand API (v1)
 
-language_tabs:
-  - shell
-  - ruby
-  - python
-  - javascript
+language_tabs: # must be one of https://git.io/vQNgJ
+  - shell: code
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a>
+  - <a href='https://camaloon.com/print_on_demand'>Camaloon Print on Demand</a>
 
-includes:
-  - errors
-
-search: true
+search: false
 
 code_clipboard: true
 ---
 
 # Introduction
 
-Welcome to the Kittn API! You can use our API to access Kittn API endpoints, which can get information on various cats, kittens, and breeds in our database.
+Welcome to Camaloon Print On Demand API (version 1.0)!
 
-We have language bindings in Shell, Ruby, Python, and JavaScript! You can view code examples in the dark area to the right, and you can switch the programming language of the examples with the tabs in the top right.
+# Webhooks to Camaloon
 
-This example API documentation page was created with [Slate](https://github.com/slatedocs/slate). Feel free to edit it and use it as a base for your own API's documentation.
+In this section we are going to describe webhooks originated by events on the origin ecommerce platform.
 
-# Authentication
+## Configuration
 
-> To authorize, use this code:
+### Webhook endpoint
 
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-```
-
-```shell
-# With shell, you can just pass the correct header with each request
-curl "api_endpoint_here"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-```
-
-> Make sure to replace `meowmeowmeow` with your API key.
-
-Kittn uses API keys to allow access to the API. You can register a new Kittn API key at our [developer portal](http://example.com/developers).
-
-Kittn expects for the API key to be included in all API requests to the server in a header that looks like the following:
-
-`Authorization: meowmeowmeow`
-
-<aside class="notice">
-You must replace <code>meowmeowmeow</code> with your personal API key.
-</aside>
-
-# Kittens
-
-## Get All Kittens
-
-```ruby
-require 'kittn'
-
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get
-```
-
-```python
-import kittn
-
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get()
-```
-
-```shell
-curl "http://example.com/api/kittens"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let kittens = api.kittens.get();
-```
-
-> The above command returns JSON structured like this:
-
-```json
-[
-  {
-    "id": 1,
-    "name": "Fluffums",
-    "breed": "calico",
-    "fluffiness": 6,
-    "cuteness": 7
-  },
-  {
-    "id": 2,
-    "name": "Max",
-    "breed": "unknown",
-    "fluffiness": 5,
-    "cuteness": 10
-  }
-]
-```
-
-This endpoint retrieves all kittens.
-
-### HTTP Request
-
-`GET http://example.com/api/kittens`
-
-### Query Parameters
-
-Parameter | Default | Description
---------- | ------- | -----------
-include_cats | false | If set to true, the result will also include cats.
-available | true | If set to false, the result will include kittens that have already been adopted.
+Webhooks to Camaloon must be sent as a **POST** request to the following endpoint:  
 
 <aside class="success">
-Remember — a happy kitten is an authenticated kitten!
+<span style="font-weight: bold; font-size: 1.2em; font-family: monospace">https://camaloon.com/print_on_demand/generic/webhooks/receive</span>
 </aside>
 
-## Get a Specific Kitten
+### Webhook headers
 
-```ruby
-require 'kittn'
+Webhooks sent to Camaloon must contain the following headers:
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.get(2)
-```
+**`X-CAMALOON-SOURCE-DOMAIN`**: Your store domain, the same used when creating the store in Camaloon.  
+**`X-CAMALOON-TOPIC`**: Event name (ex: `order_paid`).  
+**`X-CAMALOON-HMAC-SHA256`**: Base64 digest of the request body payload using the API secret key provided by Camaloon.  
 
-```python
-import kittn
+## Order paid event
 
-api = kittn.authorize('meowmeowmeow')
-api.kittens.get(2)
-```
+When an order is **paid** in your ecommerce platform, a POST request should be sent to the [Camaloon webhook endpoint](#endpoint) with the `X-CAMALOON-TOPIC=order_paid` header.
 
-```shell
-curl "http://example.com/api/kittens/2"
-  -H "Authorization: meowmeowmeow"
-```
-
-```javascript
-const kittn = require('kittn');
-
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.get(2);
-```
-
-> The above command returns JSON structured like this:
+> Request payload example
 
 ```json
 {
-  "id": 2,
-  "name": "Max",
-  "breed": "unknown",
-  "fluffiness": 5,
-  "cuteness": 10
+  "id": 1,
+  "ref": "20200901003",
+  "currency": "EUR",
+  "tax_rate": 0.21,
+  "created_at": "2020-09-01T16:09:54-04:00",
+  "processed_at":"2020-09-01T16:09:55-04:00",
+  "shipping_price": 3.2,
+  "shipping_info": {
+    "first_name": "",
+    "last_name": "",
+    "company_name": "",
+    "telephone": "",
+    "address": "",
+    "address2": "",
+    "zip": "",
+    "city": "",
+  },
+  "billing_info": {
+    "first_name": "",
+    "last_name": "",
+    "company_name": "",
+    "telephone": "",
+    "address": "",
+    "address2": "",
+    "zip": "",
+    "city": "",
+    "province": "",
+    "country_code": ""
+  },
+  "line_items": [
+    {
+      "sku": "",
+      "description": "",
+      "quantity": 10,
+      "price": 12.5
+    }
+  ]
 }
 ```
 
-This endpoint retrieves a specific kitten.
+See on the right an example of request payload of a paid order.
 
-<aside class="warning">Inside HTML code blocks like this one, you can't use Markdown, so use <code>&lt;code&gt;</code> blocks to denote code.</aside>
+### Order properties
 
-### HTTP Request
+Parameter | Optional | Description
+--------- | ---- | -----------
+`id` | no | Order id in your system.
+`ref` | yes | Human name of the order.
+`currency` | no | Currency [ISO 4217 code](https://en.wikipedia.org/wiki/ISO_4217) of the order.
+`tax_rate` | no | The tax rate applied to the order to calculate the tax price.
+`created_at` | no | The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time when an order has been created.
+`processed_at` | no | The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time when an order has been processed (paid).
+`shipping_price` | no | Total shipping price, without tax, in the order's currency.
+`shipping_info` | no | The mailing address to where the order will be shipped. See [address properties](#address-properties).
+`billing_info` | yes | The billing address of the customer. If not provided, shipping info will be used. See [address properties](#address-properties).
+`line_items` | no | Items purchased in the order. See [line item properties](#line-item-properties).
 
-`GET http://example.com/kittens/<ID>`
+### Address properties
 
-### URL Parameters
+Parameter | Optional | Description
+--------- | ---- | -----------
+`first_name` | no | The first name of the person associated with the address.
+`last_name` | no | The last name of the person associated with the address.
+`company_name` | yes | The company of the person associated with the address.
+`telephone` | yes | The phone number at the address or client's phone. Max length: 15
+`address` | no | The street address.
+`address2` | yes | An optional additional field for the street address.
+`zip` | no | Valid postal code of the address.
+`city` | no | The city, town, or village of the address.
+`province` | no | The name of the region (province, state, prefecture, …) of the address.
+`country_code` | no | The two-letter [ISO 3166-2](https://en.wikipedia.org/wiki/ISO_3166-2) code for the country of the address.
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to retrieve
 
-## Delete a Specific Kitten
+### Line item properties
 
-```ruby
-require 'kittn'
+Parameter | Optional | Description
+--------- | ---- | -----------
+`sku` | no | Stock Keeping Unit. If matches one of the sku's on your Camaloon store, the item will be processed by Camaloon.
+`description` | yes | Name of the product or description of the line item.
+`quantity` | no | The number of items that were purchased.
+`price` | no | The total final price of the line item, without taxes.
 
-api = Kittn::APIClient.authorize!('meowmeowmeow')
-api.kittens.delete(2)
-```
 
-```python
-import kittn
+# Webhooks from Camaloon
 
-api = kittn.authorize('meowmeowmeow')
-api.kittens.delete(2)
-```
+In this section we are going to describe webhooks originated by events on the Camaloon's side.
 
-```shell
-curl "http://example.com/api/kittens/2"
-  -X DELETE
-  -H "Authorization: meowmeowmeow"
-```
+## Configuration
 
-```javascript
-const kittn = require('kittn');
+### Webhook endpoint
 
-let api = kittn.authorize('meowmeowmeow');
-let max = api.kittens.delete(2);
-```
+Endpoints for the different events originated in Camaloon can be configured in the store backoffice.
 
-> The above command returns JSON structured like this:
+You will create a webhook, selecting the event name and define the endpoint that will process the webhook on your side.
+
+### Webhook headers
+
+Webhooks originated in Camaloon include the following headers.
+
+**`X-CAMALOON-TOPIC`**: Event name (ex: `shipment_sent`).  
+**`X-CAMALOON-HMAC-SHA256`**: Base64 digest of the request body payload using the API secret key provided by Camaloon.  
+
+
+## Shipment sent event
+
+When an order has been fulfilled by Camaloon and a shipment has been collected by the carrier service, a webhook will be sent with the tracking shipment info.  
+
+<aside class="notice">
+NOTE: one or multiple shipments can be sent from Camaloon for the same order. This means that a shipment can contain all or part of the line items produced by Camaloon.
+</aside>
+
+> Request payload example
 
 ```json
 {
-  "id": 2,
-  "deleted" : ":("
+  "order_id": 1,
+  "tracking_number": "",
+  "tracking_url": "",
+  "notify_customer": true,
+  "line_items": [
+    {
+      "sku": "",
+      "quantity": 10
+    }
+  ]
 }
 ```
 
-This endpoint deletes a specific kitten.
+See on the right an example of request payload of a shipment sent.
 
-### HTTP Request
+### Webhook errors
 
-`DELETE http://example.com/kittens/<ID>`
+Camaloon will listen to the HTTP response code of the webhook request, expecting a `200` or `204` code.
 
-### URL Parameters
+If the code returned is `410`, the webhook will be removed permanently.
 
-Parameter | Description
---------- | -----------
-ID | The ID of the kitten to delete
-
+Any other response code will make the webhook retry 3 times at most. If a webhook fails 20 times consecutively, it will be temporarily disabled.
