@@ -337,6 +337,10 @@
       <div class="content">
         <h1 id='introduction'>Introduction</h1>
 <p>Welcome to Camaloon Print On Demand API (version 1.0)!</p>
+
+<p>This API allows Print On Demand clients with ad hoc ecommerce platforms to connect to Camaloon Print On Demand platform.</p>
+
+<p>The API is asynchronous and event based (via webhooks).</p>
 <h1 id='webhooks-to-camaloon'>Webhooks to Camaloon</h1>
 <p>In this section we are going to describe webhooks originated by events on the origin ecommerce platform.</p>
 <h2 id='configuration'>Configuration</h2><h3 id='webhook-endpoint'>Webhook endpoint</h3>
@@ -360,39 +364,41 @@
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
   </span><span class="nl">"ref"</span><span class="p">:</span><span class="w"> </span><span class="s2">"20200901003"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"EUR"</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"tax_rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.21</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"currency"</span><span class="p">:</span><span class="w"> </span><span class="s2">"USD"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"tax_rate"</span><span class="p">:</span><span class="w"> </span><span class="mf">0.12</span><span class="p">,</span><span class="w">
   </span><span class="nl">"created_at"</span><span class="p">:</span><span class="w"> </span><span class="s2">"2020-09-01T16:09:54-04:00"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"processed_at"</span><span class="p">:</span><span class="s2">"2020-09-01T16:09:55-04:00"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"shipping_price"</span><span class="p">:</span><span class="w"> </span><span class="mf">3.2</span><span class="p">,</span><span class="w">
   </span><span class="nl">"shipping_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"telephone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Raymond B"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gordon"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gordon &amp; Sons"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"telephone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"509-259-7576"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1317 Dane Street"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"address2"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"99032"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sprague"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"province"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Washington"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"US"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nl">"billing_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
-    </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"telephone"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Raymond B"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gordon"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gordon &amp; Sons"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"telephone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"509-259-7576"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1317 Dane Street"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"address2"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"province"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-    </span><span class="nl">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="w">
+    </span><span class="nl">"zip"</span><span class="p">:</span><span class="w"> </span><span class="s2">"99032"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"city"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Sprague"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"province"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Washington"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"country_code"</span><span class="p">:</span><span class="w"> </span><span class="s2">"US"</span><span class="w">
   </span><span class="p">},</span><span class="w">
   </span><span class="nl">"line_items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"063e8da93379f8c1aee0"</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Magic mug"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="p">,</span><span class="w">
-      </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">12.5</span><span class="w">
+      </span><span class="nl">"price"</span><span class="p">:</span><span class="w"> </span><span class="mf">82.84</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
@@ -545,6 +551,9 @@
 <td>The total final price of the line item, without taxes.</td>
 </tr>
 </tbody></table>
+<h3 id='error-handling'>Error handling</h3>
+<p>Webhooks are processed asynchronously, but the data received is validated according to the previous described schema.
+If the data does not follow the schema, a HTTP status code <code>400</code> is returned and along a <code>JSON</code> with a list of errors.</p>
 <h1 id='webhooks-from-camaloon'>Webhooks from Camaloon</h1>
 <p>In this section we are going to describe webhooks originated by events on the Camaloon&#39;s side.</p>
 <h2 id='configuration-2'>Configuration</h2><h3 id='webhook-endpoint-2'>Webhook endpoint</h3>
@@ -568,19 +577,19 @@ NOTE: one or multiple shipments can be sent from Camaloon for the same order. Th
 </blockquote>
 <div class="highlight"><pre class="highlight json tab-json"><code><span class="p">{</span><span class="w">
   </span><span class="nl">"order_id"</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"tracking_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
-  </span><span class="nl">"tracking_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"tracking_number"</span><span class="p">:</span><span class="w"> </span><span class="s2">"9414 1058 1746 0398 1325 11"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"tracking_url"</span><span class="p">:</span><span class="w"> </span><span class="s2">"https://tools.usps.com/go/TrackConfirmAction?qtc_tLabels1=9414105817460398132511"</span><span class="p">,</span><span class="w">
   </span><span class="nl">"notify_customer"</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="p">,</span><span class="w">
   </span><span class="nl">"line_items"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
     </span><span class="p">{</span><span class="w">
-      </span><span class="nl">"sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">""</span><span class="p">,</span><span class="w">
+      </span><span class="nl">"sku"</span><span class="p">:</span><span class="w"> </span><span class="s2">"063e8da93379f8c1aee0"</span><span class="p">,</span><span class="w">
       </span><span class="nl">"quantity"</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="w">
     </span><span class="p">}</span><span class="w">
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
 <p>See on the right an example of request payload of a shipment sent.</p>
-<h3 id='webhook-errors'>Webhook errors</h3>
+<h3 id='error-handling-2'>Error handling</h3>
 <p>Camaloon will listen to the HTTP response code of the webhook request, expecting a <code>200</code> or <code>204</code> code.</p>
 
 <p>If the code returned is <code>410</code>, the webhook will be removed permanently.</p>
