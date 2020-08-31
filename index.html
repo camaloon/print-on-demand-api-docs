@@ -355,6 +355,20 @@
 <p><strong><code>X-CAMALOON-SOURCE-DOMAIN</code></strong>: Your store domain, the same used when creating the store in Camaloon.<br>
 <strong><code>X-CAMALOON-TOPIC</code></strong>: Event name (ex: <code>order_paid</code>).<br>
 <strong><code>X-CAMALOON-HMAC-SHA256</code></strong>: Base64 digest of the request body payload using the API secret key provided by Camaloon.  </p>
+<h3 id='webhooks-verification'>Webhooks verification</h3>
+<blockquote>
+<p>Example to generate the digest (ruby)</p>
+</blockquote>
+<div class="highlight"><pre class="highlight ruby tab-ruby"><code><span class="n">digest</span> <span class="o">=</span> <span class="no">OpenSSL</span><span class="o">::</span><span class="no">HMAC</span><span class="p">.</span><span class="nf">digest</span><span class="p">(</span>
+  <span class="s1">'sha256'</span><span class="p">,</span>
+  <span class="n">store_api_secret</span><span class="p">,</span>
+  <span class="n">request_body</span>
+<span class="p">)</span>
+<span class="no">Base64</span><span class="p">.</span><span class="nf">strict_encode64</span><span class="p">(</span><span class="n">digest</span><span class="p">)</span>
+</code></pre></div>
+<p>To verify that requests are authentic, webhooks sent to Camaloon endpoint must be signed.</p>
+
+<p>The webhook request must have a base64-encoded <code>X-CAMALOON-HMAC-SHA256</code>, which is generated using the API shared secret in your Camaloon&#39;s store config along with the data sent in the request.</p>
 <h2 id='order-paid-event'>Order paid event</h2>
 <p>When an order is <strong>paid</strong> in your ecommerce platform, a POST request should be sent to the <a href="#endpoint">Camaloon webhook endpoint</a> with the <code>X-CAMALOON-TOPIC=order_paid</code> header.</p>
 
@@ -553,7 +567,9 @@
 </tbody></table>
 <h3 id='error-handling'>Error handling</h3>
 <p>Webhooks are processed asynchronously, but the data received is validated according to the previous described schema.
-If the data does not follow the schema, a HTTP status code <code>400</code> is returned and along a <code>JSON</code> with a list of errors.</p>
+If the data does not follow the schema, a HTTP status code <code>400</code> (bad request) is returned and along a <code>JSON</code> with a list of errors.</p>
+
+<p>Also, the signature for the webhook is calculated and compared to the <code>X-CAMALOON-HMAC-SHA256</code> header. If it doesn&#39;t match, a HTTP status code <code>401</code> (unauthorized) is returned.</p>
 <h1 id='webhooks-from-camaloon'>Webhooks from Camaloon</h1>
 <p>In this section we are going to describe webhooks originated by events on the Camaloon&#39;s side.</p>
 <h2 id='configuration-2'>Configuration</h2><h3 id='webhook-endpoint-2'>Webhook endpoint</h3>
@@ -566,12 +582,6 @@ If the data does not follow the schema, a HTTP status code <code>400</code> is r
 <p><strong><code>X-CAMALOON-TOPIC</code></strong>: Event name (ex: <code>shipment_sent</code>).<br>
 <strong><code>X-CAMALOON-HMAC-SHA256</code></strong>: Base64 digest of the request body payload using the API secret key provided by Camaloon.  </p>
 <h2 id='shipment-sent-event'>Shipment sent event</h2>
-<p>When an order has been fulfilled by Camaloon and a shipment has been collected by the carrier service, a webhook will be sent with the tracking shipment info.  </p>
-
-<aside class="notice">
-NOTE: one or multiple shipments can be sent from Camaloon for the same order. This means that a shipment can contain all or part of the line items produced by Camaloon.
-</aside>
-
 <blockquote>
 <p>Request payload example</p>
 </blockquote>
@@ -588,11 +598,17 @@ NOTE: one or multiple shipments can be sent from Camaloon for the same order. Th
   </span><span class="p">]</span><span class="w">
 </span><span class="p">}</span><span class="w">
 </span></code></pre></div>
+<p>When an order has been fulfilled by Camaloon and a shipment has been collected by the carrier service, a webhook will be sent with the tracking shipment info.  </p>
+
+<aside class="notice">
+NOTE: one or multiple shipments can be sent from Camaloon for the same order. This means that a shipment can contain all or part of the line items produced by Camaloon.
+</aside>
+
 <p>See on the right an example of request payload of a shipment sent.</p>
 <h3 id='error-handling-2'>Error handling</h3>
-<p>Camaloon will listen to the HTTP response code of the webhook request, expecting a <code>200</code> or <code>204</code> code.</p>
+<p>Camaloon will listen to the HTTP response code of the webhook request, expecting a <code>200</code> (ok), <code>202</code> (accepted) or <code>204</code> (no content) codes.</p>
 
-<p>If the code returned is <code>410</code>, the webhook will be removed permanently.</p>
+<p>If the code returned is <code>410</code> (gone), the webhook will be removed permanently.</p>
 
 <p>Any other response code will make the webhook retry 3 times at most. If a webhook fails 20 times consecutively, it will be temporarily disabled.</p>
 
