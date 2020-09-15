@@ -77,6 +77,7 @@ When an order is **paid** in your ecommerce platform, a POST request should be s
   "shipping_info": {
     "first_name": "Raymond B",
     "last_name": "Gordon",
+    "email": "raymond.gordon@gordonandsons.com",
     "company_name": "Gordon & Sons",
     "telephone": "509-259-7576",
     "address": "1317 Dane Street",
@@ -122,11 +123,27 @@ Parameter | Optional | Description
 `created_at` | no | The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time when an order has been created.
 `processed_at` | no | The [ISO 8601](https://en.wikipedia.org/wiki/ISO_8601) date and time when an order has been processed (paid).
 `shipping_price` | no | Total shipping price, without tax, in the order's currency.
-`shipping_info` | no | The mailing address to where the order will be shipped. See [address properties](#address-properties).
-`billing_info` | yes | The billing address of the customer. If not provided, shipping info will be used. See [address properties](#address-properties).
+`shipping_info` | no | The mailing address to where the order will be shipped. See [address properties](#shipping-address-properties).
+`billing_info` | yes | The billing address of the customer. If not provided, shipping info will be used. See [address properties](#billing-address-properties).
 `line_items` | no | Items purchased in the order. See [line item properties](#line-item-properties).
 
-### Address properties
+### Shipping address properties
+
+Parameter | Optional | Description
+--------- | ---- | -----------
+`first_name` | no | The first name of the person associated with the address.
+`last_name` | no | The last name of the person associated with the address.
+`email` | no | Email of the person associated with the address.
+`company_name` | yes | The company of the person associated with the address.
+`telephone` | yes | The phone number at the address or client's phone. Max length: 15
+`address` | no | The street address.
+`address2` | yes | An optional additional field for the street address.
+`zip` | no | Valid postal code of the address.
+`city` | no | The city, town, or village of the address.
+`province` | no | The name of the region (province, state, prefecture, …) of the address.
+`country_code` | no | The two-letter [ISO 3166-2](https://en.wikipedia.org/wiki/ISO_3166-2) code for the country of the address.
+
+### Billing address properties
 
 Parameter | Optional | Description
 --------- | ---- | -----------
