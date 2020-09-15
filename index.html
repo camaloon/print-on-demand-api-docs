@@ -386,6 +386,7 @@
   </span><span class="nl">"shipping_info"</span><span class="p">:</span><span class="w"> </span><span class="p">{</span><span class="w">
     </span><span class="nl">"first_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Raymond B"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"last_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gordon"</span><span class="p">,</span><span class="w">
+    </span><span class="nl">"email"</span><span class="p">:</span><span class="w"> </span><span class="s2">"raymond.gordon@gordonandsons.com"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"company_name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Gordon &amp; Sons"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"telephone"</span><span class="p">:</span><span class="w"> </span><span class="s2">"509-259-7576"</span><span class="p">,</span><span class="w">
     </span><span class="nl">"address"</span><span class="p">:</span><span class="w"> </span><span class="s2">"1317 Dane Street"</span><span class="p">,</span><span class="w">
@@ -464,12 +465,12 @@
 <tr>
 <td><code>shipping_info</code></td>
 <td>no</td>
-<td>The mailing address to where the order will be shipped. See <a href="#address-properties">address properties</a>.</td>
+<td>The mailing address to where the order will be shipped. See <a href="#shipping-address-properties">address properties</a>.</td>
 </tr>
 <tr>
 <td><code>billing_info</code></td>
 <td>yes</td>
-<td>The billing address of the customer. If not provided, shipping info will be used. See <a href="#address-properties">address properties</a>.</td>
+<td>The billing address of the customer. If not provided, shipping info will be used. See <a href="#billing-address-properties">address properties</a>.</td>
 </tr>
 <tr>
 <td><code>line_items</code></td>
@@ -477,7 +478,71 @@
 <td>Items purchased in the order. See <a href="#line-item-properties">line item properties</a>.</td>
 </tr>
 </tbody></table>
-<h3 id='address-properties'>Address properties</h3>
+<h3 id='shipping-address-properties'>Shipping address properties</h3>
+<table><thead>
+<tr>
+<th>Parameter</th>
+<th>Optional</th>
+<th>Description</th>
+</tr>
+</thead><tbody>
+<tr>
+<td><code>first_name</code></td>
+<td>no</td>
+<td>The first name of the person associated with the address.</td>
+</tr>
+<tr>
+<td><code>last_name</code></td>
+<td>no</td>
+<td>The last name of the person associated with the address.</td>
+</tr>
+<tr>
+<td><code>email</code></td>
+<td>no</td>
+<td>Email of the person associated with the address.</td>
+</tr>
+<tr>
+<td><code>company_name</code></td>
+<td>yes</td>
+<td>The company of the person associated with the address.</td>
+</tr>
+<tr>
+<td><code>telephone</code></td>
+<td>yes</td>
+<td>The phone number at the address or client&#39;s phone. Max length: 15</td>
+</tr>
+<tr>
+<td><code>address</code></td>
+<td>no</td>
+<td>The street address.</td>
+</tr>
+<tr>
+<td><code>address2</code></td>
+<td>yes</td>
+<td>An optional additional field for the street address.</td>
+</tr>
+<tr>
+<td><code>zip</code></td>
+<td>no</td>
+<td>Valid postal code of the address.</td>
+</tr>
+<tr>
+<td><code>city</code></td>
+<td>no</td>
+<td>The city, town, or village of the address.</td>
+</tr>
+<tr>
+<td><code>province</code></td>
+<td>no</td>
+<td>The name of the region (province, state, prefecture, …) of the address.</td>
+</tr>
+<tr>
+<td><code>country_code</code></td>
+<td>no</td>
+<td>The two-letter <a href="https://en.wikipedia.org/wiki/ISO_3166-2">ISO 3166-2</a> code for the country of the address.</td>
+</tr>
+</tbody></table>
+<h3 id='billing-address-properties'>Billing address properties</h3>
 <table><thead>
 <tr>
 <th>Parameter</th>
